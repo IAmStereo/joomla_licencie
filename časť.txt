@@ -1,0 +1,63 @@
+<FORM ACTION="index.php?page=4" METHOD="post">
+
+Zadaj platformu:
+<INPUT TYPE="text" NAME="platforma"> <BR></BR>
+<INPUT TYPE="submit" NAME="odosli" VALUE="pridaj">
+</FORM>
+
+<?php
+
+    $link = mysqli_connect("localhost", "guzinakj", "guzinak", "guzinakj");
+
+    error_reporting(5);
+
+$id=$_GET["id"];
+
+if (($_GET["akcia"]==zmaz)&&(!$_GET["confirm"]))
+
+                	{
+
+                	echo "Naozaj si prajes vymazat platformu s id = $id ? <BR>";
+
+                	echo "<A HREF=\"index.php?page=4&akcia=zmaz&id=$id&confirm=ano\">Ano</A>";
+
+                	echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
+                	echo "<A HREF=\"index.php?page=4\">Nie</A>";
+
+               	 	}
+
+        if ($_GET["confirm"]==ano){
+
+                   		$result = MySQLi_Query($link,"DELETE from platforma where id_platforma='$id'");
+
+                    	        echo "platforma s id $id bola vymazaná";
+
+                    	        }
+
+
+if ($_POST["odosli"]) {
+
+		$platforma=$_POST["platforma"];
+
+		$platforma = MysQli_Query($link, "INSERT INTO platforma VALUES (NULL, '$platforma')");
+
+			}
+
+
+    $result = MySQLi_Query($link, "select * from platforma");
+
+    echo "<TABLE>";
+
+    echo "<TR> <TD>id_platforma</TD> <TD>platforma</TD></TR>";
+
+    while ($zaznam = MySQLi_Fetch_Array($result)):
+
+    echo "<TR><TD>".$zaznam["id_platforma"]." </TD><TD>".$zaznam["platforma"]." </TD><TD><A HREF=\"index.php?page=4&akcia=zmaz&id=".$zaznam["id_platforma"]."\">zmaž</A></TD></TR>";
+
+
+    endwhile;
+
+    echo "</TABLE>";
+
+?>

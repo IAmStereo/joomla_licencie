@@ -1,0 +1,139 @@
+<FORM ACTION="index.php?page=5" METHOD="post">
+Zadaj názov:
+<INPUT TYPE="text" NAME="nazov"> <BR></BR>
+Zadaj rok vydania:
+<INPUT TYPE="text" NAME="rok_vydania"> <BR></BR>
+<?php $link = mysqli_connect("localhost", "guzinakj", "guzinak", "guzinakj");
+$result = MySQLi_Query($link,"select * from zaner"); ?>
+<FORM ACTION="index.php?page=5" METHOD="post">
+
+Vyberte si žáner hry:
+<SELECT NAME="id_zaner">
+<option value=""></option>
+<?php
+
+            while ($zaznam = MySQLi_Fetch_Array($result)):
+
+                echo "<option value=\"".$zaznam["id_zaner"]."\">".$zaznam["zaner"]."</OPTION>";
+
+            endwhile;
+
+        ?>
+</select>
+<BR><BR>
+ 
+<?php $link = mysqli_connect("localhost", "guzinakj", "guzinak", "guzinakj");
+
+$result = MySQLi_Query($link,"select * from vyrobca_hry"); ?>
+<FORM ACTION="index.php?page=5" METHOD="post">
+
+Vyberte si výrobcu hry:
+<SELECT NAME="id_vyrobca_hry">
+<option value=""></option>
+<?php
+
+            while ($zaznam = MySQLi_Fetch_Array($result)):
+
+                echo "<option value=\"".$zaznam["id_vyrobca_hry"]."\">".$zaznam["vyrobca_hry"]."</OPTION>";
+
+            endwhile;
+
+        ?>
+</select>
+<BR><BR>
+ 
+<?php $link = mysqli_connect("localhost", "guzinakj", "guzinak", "guzinakj");
+
+$result = MySQLi_Query($link,"select * from platforma"); ?>
+<FORM ACTION="index.php?page=5" METHOD="post">
+
+Vyberte platformu:
+<SELECT NAME="id_platforma">
+<option value=""></option>
+<?php
+
+            while ($zaznam = MySQLi_Fetch_Array($result)):
+
+                echo "<option value=\"".$zaznam["id_platforma"]."\">".$zaznam["platforma"]."</OPTION>";
+
+            endwhile;
+
+        ?>
+</select>
+<BR><BR>
+ 
+Zadaj počet hráčov:
+<INPUT TYPE="text" NAME="hraci"> <BR></BR>
+ 
+<INPUT TYPE="submit" NAME="odosli" VALUE="pridaj">
+</FORM>
+ 
+<?php
+
+    $link = mysqli_connect("localhost", "guzinakj", "guzinak", "guzinakj");
+
+    error_reporting(5);
+
+$id=$_GET["id"];
+
+if (($_GET["akcia"]=="zmaz")&&(!$_GET["confirm"]))
+
+                 {
+
+                 echo "Naozaj si prajes vymazat hru s id = $id ? <BR>";
+
+                 echo "<A HREF=\"index.php?page=5&akcia=zmaz&id=$id&confirm=ano\">Ano</A>";
+
+                 echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
+                 echo "<A HREF=\"index.php?page=5\">Nie</A>";
+
+                 }
+
+        if ($_GET["confirm"]=="ano"){
+
+                    $result = MySQLi_Query($link,"DELETE from hra where id_hra='$id'");
+
+                    echo "hra s id $id bol vymazaný";
+
+                    }
+
+if ($_POST["odosli"]) {
+
+        $nazov=$_POST["nazov"];
+
+        $rok_vydania=$_POST["rok_vydania"];
+
+	$zaner=$_POST["id_zaner"];
+
+        $vyrobca_hry=$_POST["id_vyrobca_hry"];
+
+        $platforma=$_POST["id_platforma"];
+
+	$hraci=$_POST["hraci"];
+
+    $result=MySQLi_Query($link, "INSERT INTO hra VALUES (NULL, '$nazov ', '$rok_vydania ', '$zaner ', '$vyrobca_hry ', '$platforma ', '$hraci ')");
+
+        }
+
+    $result = MySQLi_Query($link, "SELECT hra.id_hra, hra.nazov, hra.rok_vydania, zaner.zaner, vyrobca_hry.vyrobca_hry, platforma.platforma, hra.hraci
+
+FROM hra
+
+LEFT JOIN(zaner, vyrobca_hry, platforma)
+
+ON (zaner.id_zaner=hra.id_zaner AND vyrobca_hry.id_vyrobca_hry=hra.id_vyrobca_hry AND platforma.id_platforma=hra.id_platforma)");
+
+    echo "<TABLE>";
+
+    echo "<TR> <TD>id_hra</TD> <TD>nazov</TD> <TD>rok_vydania</TD> <TD>zaner</TD> <TD>vyrobca_hry</TD> <TD>platforma</TD> <TD>hraci</TD> </TR>";
+ 
+    while ($zaznam = MySQLi_Fetch_Array($result)):
+
+    echo "<TR><TD>" .$zaznam["id_hra"]." </TD><TD>".$zaznam["nazov"]." </TD><TD>".$zaznam["rok_vydania"]." </TD><TD>".$zaznam["zaner"]."  </TD><TD>".$zaznam["vyrobca_hry"]." </TD><TD>".$zaznam["platforma"]." </TD><TD>".$zaznam["hraci"]." </TD><TD><A HREF=\"index.php?page=5&akcia=zmaz&id=".$zaznam["id_hra"]."\">zmaž</A></TD></TR>";
+ 
+endwhile;
+
+    echo "</TABLE>";
+
+?>

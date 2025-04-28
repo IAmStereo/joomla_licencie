@@ -1,0 +1,38 @@
+
+<HTML>
+	<HEAD>
+<TITLE> Datábaza hra</TITLE>
+</HEAD>
+<BODY>
+<TABLE BORDER="2" CELLSPACING="0" CELLPADDING="5">
+		<TR> <TD WIDTH="1100" HEIGHT="250" ALIGN="center" BACKGROUND="pozadie_hore.jpg" STYLE="font-size: 40px;"> Databáza Hra</TD></TR>
+		<TR>
+<TD WIDTH="1100" HEIGHT="30" ALIGN="center" BACKGROUND="lista.jpg" >
+<a href="index.php?page=1">Úvod</a>  &nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?page=2">Žáner</a>  &nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?page=3">Výrobca</a>  &nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?page=4">Platforma</a>  &nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?page=5">Hra</a>  &nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?page=6">Vyhladaj</a>  &nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?page=7">Kontakt</a>  &nbsp;&nbsp;&nbsp;&nbsp;
+</TD>
+</TR>
+		<TR> 
+<TD WIDTH="1100" HEIGHT="500" BACKGROUND="pozadie_stred.jpg" ALIGN="middle">
+<?php
+				$id_stranky = $_GET["page"];
+					switch ($id_stranky){
+						case 1 : include_once ("pages/uvod.php"); break;	
+						case 2 : include_once ("pages/zaner.php"); break;			
+						case 3 : include_once ("pages/vyrobca.php"); break;
+						case 4 : include_once ("pages/platforma.php"); break;
+						case 5 : include_once ("pages/hra.php"); break;
+						case 6 : include_once ("pages/vyhladanie.php"); break;
+						case 7 : include_once ("pages/kontakt.php"); break;
+					}
+			?>
+		</TD> </TR>
+		<TR> <TD WIDTH="1100" HEIGHT="30" BACKGROUND="lista.jpg">Juraj Gužiňák</TD> </TR>
+	</TABLE>
+</BODY>
+</HTML>
