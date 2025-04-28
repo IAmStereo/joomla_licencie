@@ -1,0 +1,21 @@
+server BOOT z CD
+čítať - klávesa
+disk - zrušiť a vytvoriť part. format
+urobiť heslo
+MENO servera
+Pripojiť sa na sieť a stiahnuť ovládače + všetky aplikácie
+Odpojiť za zo siete a nastaviť ju
+reštartovať server
+zapojiť čisto switch, kabel
+ipv 4    10.10.10.1.
+    10.10.10.2.
+    10.10.10.3.
+Role,     DNS, reštart
+    DHCP, reštart
+    Domain services reštart
+Čítať role domain services
+dhcp autorizovať
+nastaviť účty
+skupiny 
+zdieľanie
+nastaviť tlačiareň
