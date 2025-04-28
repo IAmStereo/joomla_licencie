@@ -1,0 +1,8 @@
+cd\
+mkdir jozo
+cd jozo
+mkdir ivan
+cd\
+cd windows
+copy *.log C:\jozo\ivan
+exit
