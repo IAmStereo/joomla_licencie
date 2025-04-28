@@ -1,0 +1,17 @@
+nano /etc/apt/sources.list  # pred DVD
+nano /etc/network/interfaces
+
+static
+address 10.0.1.xx
+netmask 255.255.254.0
+gateway 10.0.1.1
+reboot
+
+apt install openssh-server
+prihlásenie sa do putty
+
+apt install apache 2
+apt install mc
+apt install unzip
+apt install mariadb-server 
+apt update

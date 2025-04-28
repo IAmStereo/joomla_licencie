@@ -1,0 +1,17 @@
+mysql -u root -p
+CREATE DATABASE joomla_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'matura'@'localhost' IDENTIFIED BY 'heslo';
+GRANT ALL PRIVILEGES ON joomla_db.* TO 'matura'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+apt install php libapache2-mod-php php-mysql php-xml php-curl php-gd php-intl php-mbstring php-zip
+
+cd /var/www/html
+wget https://downloads.joomla.org/cms/joomla5/5-2-5/Joomla_5.2.5-Stable-Full_Package.zip
+unzip Joomla_5.2.5-Stable-Full_Package.zip -d joomla
+chown -R www-data:www-data /var/www/html/joomla
+chmod -R 755 /var/www/html/joomla
+ls -la /var/www/html
+
+systemctl restart apache2
